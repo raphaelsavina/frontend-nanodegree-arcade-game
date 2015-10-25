@@ -1,6 +1,13 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+This is a very easy game...
 
-for self-checking their submission.
+Aim:
+Move your avatar from the grass to the water avoiding collision with the bugs.
+
+If you are touching a bug, you loose and restart at your initial position.
+If you win, the game restart.
+
+Control:
+Use the the arrow ky on your keyboard to more your avator on the board: up, down, left and right.
