@@ -1,20 +1,20 @@
 // Enemies our player must avoid
 var Enemy = function() {
     // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    // the helper provided by Udacity to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = getRandomStart("x");
     this.y = getRandomStart("y");
-    // TODO Level for speed : 2 easy, 4 medium, 6 hard
+    // TODO: Choose level with speed : 2 easy, 4 medium, 6 hard
     this.speed = 2;
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
+    // move enemy to the right
     this.x += this.speed * dt;
-    // console.log("enemy X:" + this.x + " enemy Y:" + this.y)
-    // if out of screen, get a new random position
+    // Once enemy out of screen, get a new random position
     if (this.x > 5) {
         this.x = getRandomStart("x");
         this.y = getRandomStart("y");
@@ -23,15 +23,14 @@ Enemy.prototype.update = function(dt) {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
+    // convert matrix positioning to pixels
+    // convert x to integer, correction for dt
     var posX = Math.round(this.x * 101);
     var posY = (this.y * 83) - 20;
     ctx.drawImage(Resources.get(this.sprite), posX, posY);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
+// create a player with image and initial matrix-based position
 function Player() {
     this.sprite = 'images/char-boy.png';
     this.x = 2;
@@ -39,27 +38,33 @@ function Player() {
 };
 
 Player.prototype.update = function(postion) {
+    // If the player is on water (matrix.y = 0) : won
     if (this.y == 0) {
         alert("Congratulations, you won!");
         this.reposition();
     };
+    // Check for collision
     this.collision();
 };
 
 Player.prototype.reposition = function() {
-    // reposition player if won or lost
+    // reposition player if won or lost to initial position
     this.x = 2;
     this.y = 5;
 };
 
 Player.prototype.render = function() {
-    var posX = (this.x * 101);
+    // convert matrix positioning to pixels
+    var posX = this.x * 101;
     var posY = (this.y * 83) - 20;
     ctx.drawImage(Resources.get(this.sprite), posX, posY);
 };
 
 Player.prototype.collision = function() {
-    for (e in allEnemies){
+    // collision detection using the 5 x 4 matrix.
+    // if player is in same square as one bug: Lost
+    var allEnemiesLength = allEnemies.length;
+    for (var e = 0; e < allEnemiesLength; e++) {
         if (Math.round(allEnemies[e].x) == this.x && allEnemies[e].y == this.y) {
             console.log("collision");
             alert("Sorry, you lost!");
@@ -68,6 +73,7 @@ Player.prototype.collision = function() {
     };
 };
 
+// limit player movement to board matrix
 Player.prototype.handleInput = function(key, dt) {
     if (key == "up" && this.y > 0) {
         this.y = this.y - 1;
@@ -106,9 +112,11 @@ document.addEventListener('keyup', function(e) {
 });
 
 // Get random start position for enemies
+// Passing axis to have just one function
 function getRandomStart(axis) {
     if (axis == "x") {
-        // X position 1 of 7 possible, start out of canvas (*-1)
+        // X position 1 of 7 possible, start out of canvas (* -1)
+        // TODO: detection on other enemies to avoid surimpression
         var position = (Math.floor(Math.random() * 7) + 1) * -1;
     } else {
         // Y position 1 of 3 possible
