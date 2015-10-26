@@ -87,14 +87,10 @@ Player.prototype.handleInput = function(key) {
 };
 
 // All 6 enemies objects in an array called allEnemies
-var enemy1 = new Enemy();
-var enemy2 = new Enemy();
-var enemy3 = new Enemy();
-var enemy4 = new Enemy();
-var enemy5 = new Enemy();
-var enemy6 = new Enemy();
-var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
-allEnemies.push;
+var allEnemies = [];
+for (var i = 0; i < 6; i++) {
+    allEnemies.push(new Enemy());
+}
 
 // Place the player object in a variable called player
 var player = new Player();
