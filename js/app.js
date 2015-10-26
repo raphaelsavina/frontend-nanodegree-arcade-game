@@ -87,8 +87,9 @@ Player.prototype.handleInput = function(key) {
 };
 
 // All 6 enemies objects in an array called allEnemies
+var totalEnemies = 6;
 var allEnemies = [];
-for (var i = 0; i < 6; i++) {
+for (var i = 0; i < totalEnemies; i++) {
     allEnemies.push(new Enemy());
 }
 
