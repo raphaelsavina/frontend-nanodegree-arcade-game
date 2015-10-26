@@ -35,14 +35,14 @@ function Player() {
     this.sprite = 'images/char-boy.png';
     this.x = 2;
     this.y = 5;
-};
+}
 
-Player.prototype.update = function(postion) {
+Player.prototype.update = function() {
     // If the player is on water (matrix.y = 0) : won
-    if (this.y == 0) {
+    if (this.y === 0) {
         alert("Congratulations, you won!");
         this.reposition();
-    };
+    }
     // Check for collision
     this.collision();
 };
@@ -70,11 +70,11 @@ Player.prototype.collision = function() {
             alert("Sorry, you lost!");
             this.reposition();
         }
-    };
+    }
 };
 
 // limit player movement to board matrix
-Player.prototype.handleInput = function(key, dt) {
+Player.prototype.handleInput = function(key) {
     if (key == "up" && this.y > 0) {
         this.y = this.y - 1;
     } else if (key == "down" && this.y < 5) {
@@ -114,13 +114,14 @@ document.addEventListener('keyup', function(e) {
 // Get random start position for enemies
 // Passing axis to have just one function
 function getRandomStart(axis) {
+    var position;
     if (axis == "x") {
         // X position 1 of 7 possible, start out of canvas (* -1)
         // TODO: detection on other enemies to avoid surimpression
-        var position = (Math.floor(Math.random() * 7) + 1) * -1;
+        position = (Math.floor(Math.random() * 7) + 1) * -1;
     } else {
         // Y position 1 of 3 possible
-        var position = Math.floor(Math.random() * 3) + 1;
+        position = Math.floor(Math.random() * 3) + 1;
     }
     return position;
-};
+}
