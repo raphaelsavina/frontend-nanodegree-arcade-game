@@ -3,6 +3,9 @@ frontend-nanodegree-arcade-game
 
 This is a very easy game...
 
+Install:
+Open index.html in your browser and play the game. You could also upload or deploy all the files on a web server of you choice on your lcal machine or with a web hosting provider.
+
 Aim:
 Move your avatar from the grass to the water avoiding collision with the bugs.
 
